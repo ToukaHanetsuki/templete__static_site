@@ -66,7 +66,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath : 'assets/img/'
+              outputPath: 'assets/img/'
             },
           }
         ],
@@ -77,7 +77,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              outputPath : 'assets/font/'
+              outputPath: 'assets/font/'
             },
           }
         ],
