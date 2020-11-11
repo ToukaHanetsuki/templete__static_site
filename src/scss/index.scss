@@ -1,0 +1,16 @@
+@import  'ress';
+
+#app {
+  text-align: center;
+  color: #121c3d;
+  padding-top: 1em;
+
+  img {
+    width: 200px;
+    border: solid 1px #121c3d80;
+    box-shadow: 1em 1em 1em #121c3d2d;
+    border-radius: 1em;
+    margin-bottom: 2em;
+    display: inline-block;
+  }
+}

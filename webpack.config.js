@@ -1,14 +1,17 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+const outputPath = path.join(__dirname, 'dist');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: './src/main.js',
+  entry: './src/main.ts',
   output: {
-    filename: 'main.bundle.js',
-    path: path.join(__dirname, 'public/')
+    publicPath: '/',
+    filename: '[name].bundle.js',
+    path: outputPath
   },
   devtool: 'source-map',
   module: {
@@ -18,20 +21,15 @@ module.exports = {
         use: ['html-loader']
       },
       {
-        test: /\.js$/,
+        test: /\.ts$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+        use: ['ts-loader']
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: 'css-loader',
@@ -44,12 +42,14 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               sourceMap: true,
-              plugins: [
-                require('autoprefixer')({
-                  grid: true
-                }),
-                require('cssnano')
-              ]
+              postcssOptions: {
+                plugins: [
+                  require('autoprefixer')({
+                    grid: true
+                  }),
+                  require('cssnano')
+                ]
+              }
             }
           },
           {
@@ -62,38 +62,29 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/img/'
-            },
-          }
-        ],
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              outputPath: 'assets/font/'
-            },
-          }
-        ],
-      },
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/img/[name][ext]'
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: [
+      '.ts', '.js'
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: './style.bundle.css',
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'style.bundle.css'
     })
   ],
   devServer: {
-    contentBase: path.join(__dirname, 'public'),
-    watchContentBase: true
+    contentBase: outputPath,
+    watchContentBase: true,
+    open: true
   }
 };

@@ -1,0 +1,13 @@
+{
+  "eslint.run": "onSave",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "javascript.format.enable": false,
+  "editor.formatOnSave": false,
+  "eslint.alwaysShowStatus": true,
+  "eslint.options": {
+    "extensions": [ ".html", ".js", ".jsx", ".tsx", ".ts" ]
+  },
+}
