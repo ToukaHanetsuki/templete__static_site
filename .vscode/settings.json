@@ -1,13 +1,14 @@
 {
-  "eslint.run": "onSave",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "javascript.format.enable": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "eslint.alwaysShowStatus": true,
   "eslint.options": {
-    "extensions": [ ".html", ".js", ".jsx", ".tsx", ".ts" ]
-  },
+    "extensions": [".html", ".js", ".jsx", ".tsx", ".ts"]
+  }
 }

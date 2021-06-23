@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
+const Dotenv = require('dotenv-webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const outputPath = path.join(__dirname, 'dist');
 
@@ -10,16 +12,25 @@ module.exports = {
   entry: './src/main.ts',
   output: {
     publicPath: '/',
-    filename: '[name].bundle.js',
+    filename: 'bundle.[contenthash].js',
     path: outputPath
+  },
+  optimization: {
+    moduleIds: 'deterministic',
+    runtimeChunk: 'single',
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all'
+        }
+      }
+    }
   },
   devtool: 'source-map',
   module: {
     rules: [
-      {
-        test: /\.html$/,
-        use: ['html-loader']
-      },
       {
         test: /\.ts$/,
         exclude: /node_modules/,
@@ -62,29 +73,39 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        type: 'asset/resource',
-        generator: {
-          filename: 'assets/img/[name][ext]'
-        }
+        type: 'asset/resource'
       }
     ]
   },
   resolve: {
-    extensions: [
-      '.ts', '.js'
-    ]
+    extensions: ['.ts', '.js']
   },
   plugins: [
+    new Dotenv({ safe: true, allowEmptyValues: true, systemvars: true }),
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
     new MiniCssExtractPlugin({
-      filename: 'style.bundle.css'
+      filename: 'bundle.[contenthash].css'
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: './src/static',
+          to: path.join(outputPath, 'static')
+        }
+      ]
     })
   ],
   devServer: {
     contentBase: outputPath,
     watchContentBase: true,
-    open: true
+    port: 3000
+  },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__filename]
+    }
   }
 };

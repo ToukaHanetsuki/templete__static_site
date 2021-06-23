@@ -1,31 +1,43 @@
 # static site template
 
 ## Project setup
+
 ```
 yarn install
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-yarn serve
+yarn dev
 ```
 
 ### Compiles and minifies for production
+
 ```
 yarn build
 ```
 
-### Compiles and minifies and watch for production
+### Compiled debug
+
 ```
-yarn watch
+yarn start
+```
+
+### Compile cash clear
+
+```
+yarn clean
 ```
 
 ### Lints
+
 ```
 yarn lint
 ```
 
 ### Lints and fixes files
+
 ```
-yarn lint:fix
+yarn fix
 ```

@@ -3,10 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended'
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020
@@ -15,19 +12,19 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'quotes': ['error', 'single'],
+    quotes: ['error', 'single'],
     'semi-spacing': ['error', { after: false, before: false }],
     'semi-style': ['error', 'last'],
     'no-unexpected-multiline': 'error',
     'no-unreachable': 'error',
     'space-in-parens': ['error', 'never'],
     'no-multi-spaces': 'error',
-    'no-multiple-empty-lines': ['error', {'max': 1}],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': ['error', 'never'],
-    'indent': 'off',
+    indent: 'off',
     '@typescript-eslint/indent': ['error', 2],
-    'semi': 'off',
+    semi: 'off',
     '@typescript-eslint/semi': ['error'],
     'no-extra-semi': 'off',
     '@typescript-eslint/no-extra-semi': ['error'],

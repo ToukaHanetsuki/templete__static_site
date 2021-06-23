@@ -1,16 +1,15 @@
-@import  'ress';
+@import 'ress';
 
 #app {
-  text-align: center;
   color: #121c3d;
-  padding-top: 1em;
-
+  padding-top: 3em;
+  text-align: center;
   img {
-    width: 200px;
     border: solid 1px #121c3d80;
-    box-shadow: 1em 1em 1em #121c3d2d;
     border-radius: 1em;
-    margin-bottom: 2em;
+    box-shadow: 0.3em 0.3em 0.5em #121c3d2d;
     display: inline-block;
+    margin-bottom: 1.5em;
+    width: 100px;
   }
 }
